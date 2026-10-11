@@ -23,11 +23,15 @@ export default function AIAssistant() {
       const lower = userMsg.toLowerCase();
       let reply = "I'm sorry, I don't understand that yet. Try asking about skills or projects.";
       
-      if (lower.includes('project')) reply = "Aditya has built several amazing projects including Nexus Core System and AI Synthesis Engine. Check the Projects section!";
-      else if (lower.includes('skill')) reply = "Aditya is skilled in React, Tailwind, Next.js, Node.js, Python, and AI integration.";
-      else if (lower.includes('experience')) reply = "Aditya has interned as a Full Stack Developer at Pinnacle Labs and Sarangi Tech.";
-      else if (lower.includes('resume')) reply = "You can download the resume from the Hero section or the Footer.";
-      else if (lower.includes('contact')) reply = "You can send an encrypted payload from the Contact terminal.";
+      if (lower.includes('civicshield') || lower.includes('mplads') || lower.includes('anomaly')) reply = "CivicShield AI is an intelligent governance monitoring platform for MPLADS public works. It combines financial analytics, Isolation Forest anomaly detection, duplicate project detection, and verification workflows.";
+      else if (lower.includes('project')) reply = "Aditya has built several impressive projects including CivicShield AI (MPLADS Anomaly & Risk Detection), Weather-OS, Sarangi Consulting, and Accomodo. Check out the Projects section!";
+      else if (lower.includes('skill')) reply = "Aditya specializes in Full Stack Development (React, Node.js, Express, MySQL) and Data Analytics (Data Modeling, Tableau, Excel).";
+      else if (lower.includes('experience') || lower.includes('work') || lower.includes('intern')) reply = "Aditya is currently a Full Stack Developer Intern at Sarangi Tech and completed the Data Analytics Job Simulation with Deloitte Australia.";
+      else if (lower.includes('deloitte')) reply = "At Deloitte Australia (Job Simulation), Aditya completed practical tasks in Data Analytics, statistical modeling, Tableau visualization, and executive presentations.";
+      else if (lower.includes('sarangi')) reply = "At Sarangi Tech (Sarangi Group), Aditya works as a Full Stack Developer Intern, designing responsive web interfaces and developing scalable frontend/backend systems.";
+      else if (lower.includes('certificat')) reply = "Aditya holds credentials including the Deloitte Australia Data Analytics Simulation Certificate, Advanced React Patterns, and AWS certifications.";
+      else if (lower.includes('resume')) reply = "You can download Aditya's resume from the Hero section or connect via the Contact terminal.";
+      else if (lower.includes('contact')) reply = "You can send a message directly from the Contact terminal or connect on LinkedIn and GitHub.";
 
       setMessages(prev => [...prev, { type: 'bot', text: reply }]);
     }, 1000);

@@ -2,8 +2,7 @@ import { motion } from 'framer-motion';
 import { Mail, Globe } from 'lucide-react';
 import { GithubIcon as Github, LinkedinIcon as Linkedin } from '../components/Icons';
 import { cn } from '../utils/cn';
-import { skills } from '../data/portfolioData';
-import AboutPreview from './AboutPreview';
+import { skills, personalInfo } from '../data/portfolioData';
 
 function GlassCard({ children, className, title }) {
   return (
@@ -26,7 +25,7 @@ function GlassCard({ children, className, title }) {
   );
 }
 
-function ProjectCard({ title, desc, stack, icon, colorClass, shadowClass, delay = 0 }) {
+function ProjectCard({ title, desc, stack, icon, colorClass, shadowClass, image = "/profile.jpg", delay = 0 }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -40,7 +39,7 @@ function ProjectCard({ title, desc, stack, icon, colorClass, shadowClass, delay 
 
       <div className="w-full h-32 rounded-xl mb-4 overflow-hidden relative border border-white/5 group-hover:border-white/20 transition-colors">
         <div className="absolute inset-0 flex items-center justify-center text-white/20 font-mono text-xs">
-          <img src="/profile.jpg" alt="Project Mockup" className="w-full h-full object-cover" />
+          <img src={image} alt={title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         </div>
         {/* Holographic overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
@@ -88,10 +87,44 @@ export default function Dashboard() {
 
           <GlassCard title="CONNECT" className="shadow-[inset_0_0_20px_rgba(0,229,255,0.1),_0_8px_32px_rgba(0,0,0,0.8)] border-neonBlue/30">
             <div className="flex items-center gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-white hover:bg-white/10 transition-all border border-white/10 hover:border-white/30 cursor-none"><Github size={18} /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-white hover:bg-white/10 transition-all border border-white/10 hover:border-white/30 cursor-none"><Linkedin size={18} /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-white hover:bg-white/10 transition-all border border-white/10 hover:border-white/30 cursor-none"><Mail size={18} /></a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-white hover:bg-white/10 transition-all border border-white/10 hover:border-white/30 cursor-none"><Globe size={18} /></a>
+              <a 
+                href={personalInfo.socials.github} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="GitHub Profile"
+                title="GitHub: Adi32397"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-neonBlue hover:bg-neonBlue/10 transition-all border border-white/10 hover:border-neonBlue/50 hover:shadow-[0_0_15px_rgba(0,229,255,0.4)] cursor-none"
+              >
+                <Github size={18} />
+              </a>
+              <a 
+                href={personalInfo.socials.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn Profile"
+                title="LinkedIn"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-neonPurple hover:bg-neonPurple/10 transition-all border border-white/10 hover:border-neonPurple/50 hover:shadow-[0_0_15px_rgba(138,43,226,0.4)] cursor-none"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a 
+                href={`mailto:${personalInfo.socials.email}`}
+                aria-label="Email"
+                title={`Email: ${personalInfo.socials.email}`}
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-emerald-400 hover:bg-emerald-400/10 transition-all border border-white/10 hover:border-emerald-400/50 hover:shadow-[0_0_15px_rgba(52,211,153,0.4)] cursor-none"
+              >
+                <Mail size={18} />
+              </a>
+              <a 
+                href={personalInfo.socials.website || "https://github.com/Adi32397/portfolio"} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Portfolio Website"
+                title="Portfolio Repository"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-textMuted hover:text-cyan-400 hover:bg-cyan-400/10 transition-all border border-white/10 hover:border-cyan-400/50 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] cursor-none"
+              >
+                <Globe size={18} />
+              </a>
             </div>
           </GlassCard>
         </div>
@@ -149,30 +182,33 @@ export default function Dashboard() {
           {/* Project Cards Row */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-auto">
             <ProjectCard
-              title="Project 1: Sarangi Consulting Website"
-              desc="Developed a professional website for Sarangi Consulting, an IT firm specializing in custom software, AI/ML, and cybersecurity solutions, with a focus on user experience and service showcase."
-              stack="HTML, CSS, JavaScript"
-              icon={<div className="w-4 h-4 bg-neonPurple rounded-full blur-[2px]" />}
-              colorClass="bg-neonPurple/20 text-neonPurple border-neonPurple/50"
-              shadowClass="shadow-[inset_0_0_20px_rgba(138,43,226,0.1)] border-neonPurple/30 hover:shadow-[0_0_30px_rgba(138,43,226,0.3)]"
+              title="Project 1: CivicShield AI"
+              desc="AI-powered governance monitoring platform combining financial analytics, Isolation Forest anomaly detection, duplicate screening, and verification workflows."
+              stack="React, Node.js, MySQL, Isolation Forest"
+              image="/civicshield.jpg"
+              icon={<div className="w-4 h-4 bg-[#86EFAC] rounded-full blur-[2px]" />}
+              colorClass="bg-[#86EFAC]/20 text-[#86EFAC] border-[#86EFAC]/50"
+              shadowClass="shadow-[inset_0_0_20px_rgba(134,239,172,0.1)] border-[#86EFAC]/30 hover:shadow-[0_0_30px_rgba(134,239,172,0.3)]"
               delay={0.2}
             />
             <ProjectCard
-              title="Project 2: Accomodo Website"
-              desc="Developed a modern, responsive website for Accomodo, a platform connecting travelers with comfortable accommodations, featuring intuitive navigation and an engaging user experience."
+              title="Project 2: Sarangi Consulting"
+              desc="Developed a professional website for Sarangi Consulting, an IT firm specializing in custom software, AI/ML, and cybersecurity solutions, with a focus on user experience and service showcase."
               stack="HTML, CSS, JavaScript"
-              icon={<div className="w-4 h-4 bg-neonBlue rounded-full blur-[2px]" />}
-              colorClass="bg-neonBlue/20 text-neonBlue border-neonBlue/50"
-              shadowClass="shadow-[inset_0_0_20px_rgba(0,229,255,0.1)] border-neonBlue/30 hover:shadow-[0_0_30px_rgba(0,229,255,0.3)]"
+              image="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop"
+              icon={<div className="w-4 h-4 bg-neonPurple rounded-full blur-[2px]" />}
+              colorClass="bg-neonPurple/20 text-neonPurple border-neonPurple/50"
+              shadowClass="shadow-[inset_0_0_20px_rgba(138,43,226,0.1)] border-neonPurple/30 hover:shadow-[0_0_30px_rgba(138,43,226,0.3)]"
               delay={0.4}
             />
             <ProjectCard
-              title="Project 3: AI Analytics"
-              desc="Description, intelligent data processing and high-performance analytics engine."
-              stack="Python, Django, AWS"
-              icon={<div className="w-4 h-4 bg-yellow-400 rounded-full blur-[2px]" />}
-              colorClass="bg-yellow-400/20 text-yellow-400 border-yellow-400/50"
-              shadowClass="shadow-[inset_0_0_20px_rgba(250,204,21,0.1)] border-yellow-400/30 hover:shadow-[0_0_30px_rgba(250,204,21,0.3)]"
+              title="Project 3: Accomodo"
+              desc="Developed a modern, responsive website for Accomodo, a platform connecting travelers with comfortable accommodations, featuring intuitive navigation and an engaging user experience."
+              stack="React, Node.js, Express, MongoDB"
+              image="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop"
+              icon={<div className="w-4 h-4 bg-neonBlue rounded-full blur-[2px]" />}
+              colorClass="bg-neonBlue/20 text-neonBlue border-neonBlue/50"
+              shadowClass="shadow-[inset_0_0_20px_rgba(0,229,255,0.1)] border-neonBlue/30 hover:shadow-[0_0_30px_rgba(0,229,255,0.3)]"
               delay={0.6}
             />
           </div>

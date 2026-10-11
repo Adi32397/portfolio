@@ -11,20 +11,36 @@ export default function Contact() {
     e.preventDefault();
     setStatus('sending');
     
-    // NOTE: Replace these with your actual EmailJS credentials
-    const SERVICE_ID = 'YOUR_SERVICE_ID';
-    const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-    const PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
     
-    if (SERVICE_ID === 'YOUR_SERVICE_ID') {
-      // Mocking submission since credentials aren't set yet
+    if (
+      !SERVICE_ID || 
+      !TEMPLATE_ID || 
+      !PUBLIC_KEY || 
+      SERVICE_ID === 'YOUR_SERVICE_ID'
+    ) {
+      console.warn("EmailJS credentials not configured in .env. Running in simulation mode.");
       setTimeout(() => setStatus('success'), 1500);
       return;
     }
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
+    const templateParams = {
+      name: formData.name,
+      from_name: formData.name,
+      email: formData.email,
+      from_email: formData.email,
+      reply_to: formData.email,
+      message: formData.message,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
       .then(() => setStatus('success'))
-      .catch(() => setStatus('error'));
+      .catch((err) => {
+        console.error("EmailJS transmission error:", err);
+        setStatus('error');
+      });
   };
 
   return (
