@@ -6,7 +6,7 @@ export const personalInfo = {
   education: "Computer Science & Engineering",
   about: "I am a passionate Full Stack Developer and AI Enthusiast. I specialize in building immersive, high-performance web applications using modern technologies. My focus is on delivering exceptional user experiences through clean code and innovative design.",
   stats: [
-    { label: "Projects Completed", value: 15 },
+    { label: "Projects Completed", value: 5 },
     { label: "Internships", value: 2 },
     { label: "Certificates", value: 10 },
     { label: "Technologies", value: 25 }

@@ -69,9 +69,9 @@ export default function Dashboard() {
         <div className="flex flex-col gap-6 w-full xl:w-72 shrink-0">
           <GlassCard title="DEV STATS" className="shadow-[inset_0_0_20px_rgba(0,229,255,0.1),_0_8px_32px_rgba(0,0,0,0.8)] border-neonBlue/30">
             <p className="text-textMuted text-xs font-medium flex items-center gap-2">
-              Commits: <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">4,891</span>
+              Commits: <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">250+</span>
               <span className="text-white/20">|</span>
-              Projects: <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">23</span>
+              Projects: <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">5</span>
             </p>
           </GlassCard>
 
